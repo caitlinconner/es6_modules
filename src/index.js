@@ -1,4 +1,5 @@
-import Wishlist from "./wishlist.";
+import Wishlist from "./wishlist.js";
+
 
 let form = document.querySelector("#submitForm");
 let makeInput = document.querySelector("#makeInput");
@@ -7,10 +8,14 @@ let yearInput = document.querySelector("#yearInput");
 let paraMake = document.querySelector("#car-make");
 let paraModel = document.querySelector("#car-model");
 let paraYear = document.querySelector("#car-year");
-let remButton = document.getElementsByClassName("removeBtn");
+let remButton = document.querySelector("#removeBtn");
 let wishlistUl = document.querySelector("#wishListContainer > ul");
 
 let wishlist = new Wishlist();
+
+form.addEventListener("submit", addCar);
+
+remButton.addEventListener("click", removeCar);
 
 function showCarDetails(car) {
     paraMake = car.make;
@@ -43,13 +48,13 @@ function addCar(event) {
 }
 
 function removeCar() {
-    let carId = Number(removeBtn.getAttribute("data-carId"));
+    let carId = Number(remButton.getAttribute("data-carId"));
     wishlist.remove(carId);
 
     updateDOMList();
 
-    paraMake.innerHTML = "";
-    paraModel.innerHTML = "";
-    paraYear.innerHTML = "";
+    paraMake.textContent = "";
+    paraModel.textContent = "";
+    paraYear.textContent = "";
     remButton.disabled = true;
 }
